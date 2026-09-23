@@ -113,46 +113,89 @@ Qualquer obstáculo ou gasto que aumente o custo de uma aresta entre dois nós:
 .
 ├── csv/
 │   └── vicente_pires/
-│       ├── elements.csv      # nós do grafo
-│       ├── connections.csv   # arestas e seus custos (nos dois sentidos)
+│       ├── elements.csv               # nós da cidade
+│       ├── connections.csv            # arestas entre nós da cidade
 │       └── intercity_connections.csv  # arestas para nós de outras cidades
-├── main.py
+├── main.py                            # loop de interação com o usuário
+├── route_planner.py                   # cálculo de rotas (A*)
 ├── LICENSE
 └── README.md
 ```
 
+---
+
+## Padrão dos dados
+
+Siga este padrão ao cadastrar uma nova cidade.
+
+### Regras gerais
+
+- Cada cidade tem uma pasta própria em `csv/`, com nome em `snake_case` e sem acentos (ex.: `guara_1`, `arniqueiras`).
+- Toda pasta de cidade contém **exatamente** os três arquivos: `elements.csv`, `connections.csv` e `intercity_connections.csv`. Se não houver conexões com outras cidades, `intercity_connections.csv` fica só com o cabeçalho.
+- Arquivos em UTF-8, separados por vírgula. Textos que contêm vírgula ficam entre aspas (ex.: `"Rua 3, Chácara 12, Vicente Pires"`).
+- Os **labels dos nós são únicos em todo o projeto**, não só na cidade. Vicente Pires usa `n01` a `n40`, então a próxima cidade começa em `n41`, e assim por diante.
+
 ### `elements.csv`: nós
 
+```csv
+Label,Address,Type,Resident,Latitude,Longitude
+n01,"Rua 3, Chácara 12, Vicente Pires",headquarters,,-15.803512,-48.028945
+n02,"Rua 3, Chácara 45, Vicente Pires",residence,Dona Maria Silva,-15.80482,-48.02611
+```
+
 | Coluna | Descrição |
 | --- | --- |
-| `Label` | Identificador do nó (ex.: `n01`) |
+| `Label` | Identificador único do nó (ex.: `n01`) |
 | `Address` | Endereço |
 | `Type` | `residence`, `headquarters`, `collect_point` ou `reference_point` |
-| `Resident` | Nome do idoso (apenas para residências) |
-| `Latitude`, `Longitude` | Coordenadas geográficas |
+| `Resident` | Nome do idoso. Preenchido apenas em `residence`; vazio nos demais tipos |
+| `Latitude`, `Longitude` | Coordenadas reais do ponto, em graus decimais |
 
-### `connections.csv`: arestas
+### `connections.csv` e `intercity_connections.csv`: arestas
 
-| Coluna | Descrição |
-| --- | --- |
-| `From`, `To` | Nós de origem e destino |
-| `Type` | Tipo da conexão (ex.: `route`) |
-| `robot_walkable` | Se o robô pode percorrer o trecho por conta própria |
-| `distance` | Distância percorrida |
-| `time` | Tempo de percurso |
-| `battery_consumption` | Consumo de bateria |
-| `security` | Nível de segurança da rota |
-| `financial_cost` | Custo financeiro |
-| `traffic_light` | Presença de semáforos |
-| `road_holes` | Presença de buracos |
-| `traffic_jam` | Engarrafamento |
-| `speed_bumps` | Lombadas |
+Os dois arquivos têm as mesmas colunas. Em `connections.csv`, os dois nós são da mesma cidade. Em `intercity_connections.csv`, `From` é um nó desta cidade e `To` é um nó de outra cidade.
+
+```csv
+From,To,Type,robot_walkable,distance,time,battery_consumption,security,financial_cost,traffic_light,road_holes,traffic_jam,speed_bumps
+n01,n02,route,true,440,0.9,2.2,8,0,0,1,2,2
+n02,n01,route,true,440,0.9,2.2,8,0,0,1,2,2
+n20,n23,route,false,2760,2.8,0,5,10.52,2,2,6,4
+n23,n20,route,false,2760,2.8,0,5,10.52,2,2,6,4
+```
+
+**Toda conexão é cadastrada nos dois sentidos**: uma linha `A,B` e outra `B,A`, com os mesmos valores. Nenhuma coluna pode ficar vazia.
+
+| Coluna | Unidade | Como preencher |
+| --- | --- | --- |
+| `From`, `To` | label | Nós de origem e destino |
+| `Type` | — | `route` |
+| `robot_walkable` | `true`/`false` | `true` se o robô pode fazer o trecho sozinho; `false` se precisa de um carro da empresa |
+| `distance` | metros | Distância em linha reta entre as coordenadas |
+| `time` | minutos | calculado com base na distância e velocidade (velocidade muda com base no modo de deslocamento) |
+| `battery_consumption` | % da bateria | Quantidade de bateria consumida para cada km |
+| `security` | 0 a 10 | Segurança do trecho; quanto maior, mais seguro |
+| `financial_cost` | R$ | Custo financeiro agregado da rota |
+| `traffic_light` | quantidade | Número de semáforos no trecho |
+| `road_holes` | 0 a 10 | Intensidade de buracos; 0 = nenhum |
+| `traffic_jam` | 0 a 10 | Intensidade de engarrafamento; 0 = nenhum |
+| `speed_bumps` | quantidade | Número de lombadas no trecho |
+
+#### Custos por modo de deslocamento
+
+| | Robô a pé (`robot_walkable = true`) | Carro da empresa (`robot_walkable = false`) |
+| --- | --- | --- |
+| Velocidade | 30 km/h | 60 km/h |
+| `time` | `distance (km) ÷ 30 × 60` (= `distance (km) × 2`) | `distance (km) ÷ 60 × 60` (= `distance (km) × 1`) |
+| `battery_consumption` | `distance (km) × 5` (5% por km) | `0` (o robô não gasta bateria no carro) |
+| `financial_cost` | `0` | `5 + distance (km) × 2` (R$ 5 de bandeirada + R$ 2 por km) |
+
+Exemplo: um trecho de 1240 m a pé fica com `time = 2.5`, `battery_consumption = 6.2` e `financial_cost = 0`. O mesmo trecho de carro fica com `time = 1.2`, `battery_consumption = 0` e `financial_cost = 7.48`.
 
 ---
 
 ## Status
 
-🚧 Em desenvolvimento. Os dados de **Vicente Pires** já estão disponíveis. As demais cidades e o algoritmo de roteamento (`main.py`) ainda serão implementados.
+🚧 Em desenvolvimento. Os dados de **Vicente Pires** já estão disponíveis. As demais cidades e o algoritmo de roteamento (`route_planner.py`) ainda serão implementados.
 
 ## Licença
 
