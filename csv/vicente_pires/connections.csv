@@ -1,4 +1,4 @@
-From,To,Type,robot_walkable,distância percorrida,tempo,consumo de bateria,segurança da rota,custo financeiro,Presença de semáforo,Presença de buracos,Engarrafamento,Lombadas
+From,To,Type,robot_walkable,distance,time,battery_consumption,security,financial_cost,traffic_light,road_holes,traffic_jam,speed_bumps
 n01,n02,route,true,800,3,2,8,1,0,1,2,2
 n02,n03,route,true,1200,5,4,7,2,1,3,4,3
 n03,n04,route,true,500,2,1,9,1,0,0,1,1
