@@ -114,7 +114,8 @@ Qualquer obstáculo ou gasto que aumente o custo de uma aresta entre dois nós:
 ├── csv/
 │   └── vicente_pires/
 │       ├── elements.csv      # nós do grafo
-│       └── connections.csv   # arestas e seus custos
+│       ├── connections.csv   # arestas e seus custos (nos dois sentidos)
+│       └── intercity_connections.csv  # arestas para nós de outras cidades
 ├── main.py
 ├── LICENSE
 └── README.md
