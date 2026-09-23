@@ -1,9 +1,11 @@
+from generate_graph import load_graph
 from route_planner import find_best_route
 
 EXIT_COMMAND = "sair"
 
 
 def main() -> None:
+    graph = load_graph()
     print("CareBot Route Planner (digite 'sair' para encerrar)")
 
     while True:
@@ -15,7 +17,7 @@ def main() -> None:
         if goal.lower() == EXIT_COMMAND:
             break
 
-        route = find_best_route(start, goal)
+        route = find_best_route(graph, start, goal)
         if route:
             print("Melhor rota: " + " -> ".join(route))
         else:
