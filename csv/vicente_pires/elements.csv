@@ -1,0 +1,41 @@
+Label,Address,Type,Resident,Latitude,Longitude
+n01,"Rua 3, Chácara 12, Vicente Pires",headquarters,,-15.803512,-48.028945
+n02,"Rua 3, Chácara 45, Vicente Pires",residence,Dona Maria Silva,-15.80482,-48.02611
+n03,"Rua 3, Chácara 88, Vicente Pires",residence,Seu João Santos,-15.8062,-48.0234
+n04,"Entrada da Quadra 3, Vicente Pires",reference_point,,-15.8021,-48.0312
+n05,"Rua 4, Chácara 10, Vicente Pires",collect_point,,-15.8081,-48.0298
+n06,"Rua 4, Chácara 15, Vicente Pires",residence,Dona Ana Oliveira,-15.8095,-48.0271
+n07,"Rua 4, Chácara 30, Vicente Pires",residence,Seu Pedro Costa,-15.8112,-48.0245
+n08,"Rua 4A, Chácara 2, Vicente Pires",residence,Dona Francisca Lima,-15.807,-48.0321
+n09,"Entrada da Quadra 4, Vicente Pires",reference_point,,-15.8055,-48.0335
+n10,"Rua 5, Chácara 100, Vicente Pires",residence,Seu Antonio Pereira,-15.813,-48.028
+n11,"Rua 5, Chácara 120, Vicente Pires",residence,Dona Raimunda Souza,-15.8145,-48.0252
+n12,"Rua 6, Chácara 5, Vicente Pires",residence,Seu José Ferreira,-15.816,-48.031
+n13,"Rua 6, Chácara 22, Vicente Pires",residence,Dona Tereza Alves,-15.8178,-48.0285
+n14,"Entrada da Quadra 6, Vicente Pires",reference_point,,-15.815,-48.034
+n15,"Rua 8, Chácara 14, Vicente Pires",collect_point,,-15.8195,-48.0325
+n16,"Rua 8, Chácara 50, Vicente Pires",residence,Seu Francisco Rodrigues,-15.821,-48.029
+n17,"Rua 8, Chácara 75, Vicente Pires",residence,Dona Antonia Martins,-15.8225,-48.026
+n18,"Rua 10, Chácara 3, Vicente Pires",residence,Seu Luiz Barbosa,-15.8238,-48.035
+n19,"Rua 10, Chácara 18, Vicente Pires",residence,Dona Geralda Ribeiro,-15.8252,-48.0315
+n20,"Entrada da Quadra 10, Vicente Pires",reference_point,,-15.823,-48.0372
+n21,"Rua 12, Chácara 8, Vicente Pires",residence,Seu Carlos Ramos,-15.827,-48.033
+n22,"Rua 12, Chácara 33, Vicente Pires",residence,Dona Luzia Cardoso,-15.8285,-48.0298
+n23,"Feira Produtor, Vicente Pires",collect_point,,-15.812,-48.021
+n24,"Rua das Palmeiras, Ch. 1, Vicente Pires",residence,Seu Paulo Teixeira,-15.801,-48.025
+n25,"Rua das Palmeiras, Ch. 12, Vicente Pires",residence,Dona Sebastiana Araujo,-15.8025,-48.022
+n26,"Entrada Marginal EPTG, Vicente Pires",reference_point,,-15.829,-48.0225
+n27,"Rua 3B, Chácara 4, Vicente Pires",residence,Seu Manoel Nunes,-15.804,-48.034
+n28,"Rua 3B, Chácara 19, Vicente Pires",residence,Dona Conceição Cavalcante,-15.8058,-48.031
+n29,"Rua 4B, Chácara 7, Vicente Pires",residence,Seu Joaquim Moreira,-15.81,-48.033
+n30,"Rua 4B, Chácara 25, Vicente Pires",residence,Dona Maria das Graças,-15.8118,-48.0305
+n31,"Praça Central, Vicente Pires",collect_point,,-15.8135,-48.0265
+n32,"Rua 7, Chácara 11, Vicente Pires",residence,Seu Benedito Machado,-15.817,-48.0255
+n33,"Rua 7, Chácara 40, Vicente Pires",residence,Dona Rita de Cássia,-15.8188,-48.0225
+n34,"Entrada Estrutural, Vicente Pires",reference_point,,-15.798,-48.029
+n35,"Rua 10B, Chácara 2, Vicente Pires",residence,Seu Geraldo Magela,-15.8245,-48.038
+n36,"Rua 10B, Chácara 15, Vicente Pires",residence,Dona Aparecida Freitas,-15.826,-48.0355
+n37,"Rua 12A, Chácara 6, Vicente Pires",residence,Seu Vicente Paulo,-15.828,-48.036
+n38,"Rua 12A, Chácara 21, Vicente Pires",residence,Dona Helena Barros,-15.8295,-48.0335
+n39,"Posto de Saúde, Vicente Pires",collect_point,,-15.8165,-48.024
+n40,"Entrada Vereda da Cruz, Vicente Pires",reference_point,,-15.831,-48.027
