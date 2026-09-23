@@ -116,11 +116,31 @@ Qualquer obstáculo ou gasto que aumente o custo de uma aresta entre dois nós:
 │       ├── elements.csv               # nós da cidade
 │       ├── connections.csv            # arestas entre nós da cidade
 │       └── intercity_connections.csv  # arestas para nós de outras cidades
+├── models/
+│   └── graph.py                       # classes Element, Connection e Graph
+├── generate_graph.py                  # gera graph.json a partir dos CSVs
+├── graph.json                         # tabelas hash do grafo (gerado, não editar à mão)
 ├── main.py                            # loop de interação com o usuário
 ├── route_planner.py                   # cálculo de rotas (A*)
 ├── LICENSE
 └── README.md
 ```
+
+---
+
+## Como executar
+
+```bash
+python3 generate_graph.py   # sempre que algum CSV mudar
+python3 main.py
+```
+
+`generate_graph.py` lê os CSVs de todas as cidades e salva em `graph.json` duas tabelas hash:
+
+- `nodes`: label do nó → dados do nó (cidade, endereço, tipo, residente, coordenadas)
+- `connections`: label do nó → lista das conexões que saem dele, com todos os custos
+
+O script também valida os dados e para com erro se encontrar label repetido, conexão para nó inexistente ou coluna vazia. **Depois de alterar qualquer CSV, rode o script de novo e faça commit do `graph.json` junto.**
 
 ---
 
@@ -163,7 +183,7 @@ n20,n23,route,false,2760,2.8,0,5,10.52,2,2,6,4
 n23,n20,route,false,2760,2.8,0,5,10.52,2,2,6,4
 ```
 
-**Toda conexão é cadastrada nos dois sentidos**: uma linha `A,B` e outra `B,A`, com os mesmos valores. Nenhuma coluna pode ficar vazia.
+Cada linha é uma conexão **de mão única**, de `From` para `To`. Se o trecho puder ser feito nos dois sentidos, cadastre também a linha inversa (`B,A`); os valores podem ser diferentes em cada sentido. Nenhuma coluna pode ficar vazia.
 
 | Coluna | Unidade | Como preencher |
 | --- | --- | --- |
