@@ -8,13 +8,18 @@ def find_best_route(graph: Graph, start: str, goal: str) -> list[str]:
     An empty list means there is no route between the two nodes.
     """
 from heapq import heappush, heappop
-from math import sqrt
+from math import asin, cos, radians, sin, sqrt
+
+EARTH_RADIUS_METERS = 6_371_000
+
 
 def heuristic(node_a, node_b):
-    return sqrt(
-        (node_a.latitude - node_b.latitude) ** 2 +
-        (node_a.longitude - node_b.longitude) ** 2
-    )
+    """Straight-line distance in meters between two nodes (haversine formula)."""
+    lat_a, lon_a = radians(node_a.latitude), radians(node_a.longitude)
+    lat_b, lon_b = radians(node_b.latitude), radians(node_b.longitude)
+
+    h = sin((lat_b - lat_a) / 2) ** 2 + cos(lat_a) * cos(lat_b) * sin((lon_b - lon_a) / 2) ** 2
+    return 2 * EARTH_RADIUS_METERS * asin(sqrt(h))
 
 
 def reconstruct_path(came_from, current):
