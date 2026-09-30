@@ -11,8 +11,8 @@ def heuristic(node_a: Element, node_b: Element) -> float:
     lat_a, lon_a = radians(node_a.latitude), radians(node_a.longitude)
     lat_b, lon_b = radians(node_b.latitude), radians(node_b.longitude)
 
-    h = sin((lat_b - lat_a) / 2) ** 2 + cos(lat_a) * cos(lat_b) * sin((lon_b - lon_a) / 2) ** 2
-    return 2 * EARTH_RADIUS_METERS * asin(sqrt(h))
+    a = sin((lat_b - lat_a) / 2) ** 2 + cos(lat_a) * cos(lat_b) * sin((lon_b - lon_a) / 2) ** 2
+    return 2 * EARTH_RADIUS_METERS * asin(sqrt(a))
 
 
 def reconstruct_path(came_from: dict[str, str], current: str) -> list[str]:
