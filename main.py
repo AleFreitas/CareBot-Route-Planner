@@ -12,10 +12,16 @@ def main() -> None:
         start = input("\nOnde você está? ").strip()
         if start.lower() == EXIT_COMMAND:
             break
+        if start not in graph.nodes:
+            print(f"Ponto {start!r} não existe.")
+            continue
 
         goal = input("Para onde quer ir? ").strip()
         if goal.lower() == EXIT_COMMAND:
             break
+        if goal not in graph.nodes:
+            print(f"Ponto {goal!r} não existe.")
+            continue
 
         route = find_best_route(graph, start, goal)
         if route:
@@ -25,4 +31,7 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (KeyboardInterrupt, EOFError):
+        print()
